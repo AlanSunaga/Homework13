@@ -29,15 +29,13 @@ public class App {
 
 
         ProductBasket.nameString();
-        System.out.println("Итого: " + getTotalPrice());
-        System.out.println("ProductBasket.seorProd(\"Хлеб\") = " + seorProd("Хлеб"));
-        System.out.println("ProductBasket.seorProd(\"Бобиджон\") = " + seorProd("Бобиджон"));
+        System.out.println("ProductBasket.searchProduct(\"Хлеб\") = " + searchProduct("Хлеб"));
+        System.out.println("ProductBasket.searchProduct(\"Бобиджон\") = " + searchProduct("Бобиджон"));
 
         ProductBasket.cleanBascket();
 
         ProductBasket.nameString();
-        System.out.println("Итого: " + getTotalPrice());
-        System.out.println("ProductBasket.seorProd(\"Хлеб\") = " + seorProd("Хлеб"));
+        System.out.println("ProductBasket.searchProduct(\"Хлеб\") = " + searchProduct("Хлеб"));
 
     }
 }

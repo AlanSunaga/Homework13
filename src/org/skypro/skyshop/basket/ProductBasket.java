@@ -37,11 +37,12 @@ public class ProductBasket {
             for (Product product : products) {
                 System.out.println(product.getNameProduct() + ":" + product.getPriceProduct());
             }
+            System.out.println("Итого: " + getTotalPrice());
         } else System.out.println("Корзина пуста");
 
     }
 
-    public static Boolean seorProd(String name) {
+    public static Boolean searchProduct(String name) {
 
         if (products[0] == null) {
             return false;
