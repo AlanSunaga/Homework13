@@ -1,11 +1,14 @@
 package org.skypro.skyshop.basket;
 
+import org.skypro.skyshop.product.DiscountedProduct;
+import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 
 public class ProductBasket {
     static Product[] products = new Product[5];
     static int sum;
     static int index = 1;
+    static int scoreIsSpecial = 0;
 
 
     public static void addProductName(Product product) throws IllegalAccessException {
@@ -28,17 +31,20 @@ public class ProductBasket {
                 sum += products[i].getPriceProduct();
             }
             return sum;
-
         }
     }
 
     public static void nameString() {
         if (products[0] != null) {
             for (Product product : products) {
-                System.out.println(product.getNameProduct() + ":" + product.getPriceProduct());
+                System.out.println(product.toString());
                 sum += product.getPriceProduct();
+                if (product.isSpecial()) {
+                    scoreIsSpecial++;
+                }
             }
             System.out.println("Итого: " + sum);
+            System.out.println("Специальных товаров: " + scoreIsSpecial);
         } else System.out.println("Корзина пуста");
 
     }
