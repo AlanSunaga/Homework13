@@ -36,8 +36,9 @@ public class ProductBasket {
         if (products[0] != null) {
             for (Product product : products) {
                 System.out.println(product.getNameProduct() + ":" + product.getPriceProduct());
+                sum += product.getPriceProduct();
             }
-            System.out.println("Итого: " + getTotalPrice());
+            System.out.println("Итого: " + sum);
         } else System.out.println("Корзина пуста");
 
     }

@@ -24,10 +24,6 @@ public class App {
 
         addProductName(product5);
 
-
-
-
-
         ProductBasket.nameString();
         System.out.println("ProductBasket.searchProduct(\"Хлеб\") = " + searchProduct("Хлеб"));
         System.out.println("ProductBasket.searchProduct(\"Бобиджон\") = " + searchProduct("Бобиджон"));
