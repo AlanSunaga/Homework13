@@ -1,14 +1,12 @@
 package org.skypro.skyshop.searchProduct;
 
-import org.skypro.skyshop.product.Product;
-
 public interface Searchable {
-    String searchTerm();
+    String getSearchTerm();
 
     String returnTypeContent();
 
 
     default void getStringRepresentation() {
-        System.out.println(searchTerm() + "-объекта — тип " + returnTypeContent() + "-объекта");
+        System.out.println(getSearchTerm() + "-объекта — тип " + returnTypeContent() + "-объекта");
     }
 }

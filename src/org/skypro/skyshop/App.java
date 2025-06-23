@@ -5,7 +5,7 @@ import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
-import org.skypro.skyshop.searchProduct.Article;
+import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.searchProduct.SearchEngine;
 import static org.skypro.skyshop.basket.ProductBasket.*;
 
