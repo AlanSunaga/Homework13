@@ -32,14 +32,20 @@ public class ProductBasket {
         }
     }
 
-    public static void nameString() {
+    public static void nameString() throws IllegalAccessException {
+
         if (products[0] != null) {
             for (Product product : products) {
-                System.out.println(product.toString());
-                sum += product.getPriceProduct();
-                if (product.isSpecial()) {
-                    scoreIsSpecial++;
+                if (product == null) {
+                    throw new IllegalAccessException();
+                } else {
+                    System.out.println(product.toString());
+                    sum += product.getPriceProduct();
+                    if (product.isSpecial()) {
+                        scoreIsSpecial++;
+                    }
                 }
+
             }
             System.out.println("Итого: " + sum);
             System.out.println("Специальных товаров: " + scoreIsSpecial);
@@ -47,14 +53,16 @@ public class ProductBasket {
 
     }
 
-    public static Boolean searchProduct(String name) {
+    public static Boolean searchProduct(String name) throws IllegalAccessException {
 
         if (products[0] == null) {
             return false;
         } else {
 
             for (int i = 0; i < products.length; i++) {
-                if (products[i].getNameProduct() == name) {
+                if (products[i] == null) {
+                    throw new IllegalAccessException();
+                } else if (products[i].getNameProduct() == name) {
                     return true;
                 }
             }

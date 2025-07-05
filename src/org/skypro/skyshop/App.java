@@ -1,22 +1,34 @@
 package org.skypro.skyshop;
 
-import org.skypro.skyshop.basket.ProductBasket;
+
+import org.skypro.skyshop.bestResultNotFound.BestResultNotFound;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.searchProduct.SearchEngine;
+
 import static org.skypro.skyshop.basket.ProductBasket.*;
 
 
 public class App {
     public static void main(String[] args) throws IllegalAccessException {
-        Product product1 = new SimpleProduct("Хлеб", 50);
-        Product product2 = new DiscountedProduct("Молоко", 80, 50);
-        Product product3 = new SimpleProduct("Сыр", 300);
-        Product product4 = new FixPriceProduct("Чипсы");
-        Product product5 = new DiscountedProduct("Газировка", 150, 20);
+        Product product1 = null;
+        Product product2 = null;
+        Product product3 = null;
+        Product product4 = null;
+        Product product5 = null;
+
+        try {
+            product1 = new SimpleProduct("Хлеб", 50);
+            product2 = new DiscountedProduct("Молоко", 80, 50);
+            product3 = new SimpleProduct("Сыр", -300);
+            product4 = new FixPriceProduct("Чипсы");
+            product5 = new DiscountedProduct("", 50, -20);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Заполните данные верно!");
+        }
 
         addProductName(product1);
 
@@ -28,14 +40,18 @@ public class App {
 
         addProductName(product5);
 
-        ProductBasket.nameString();
+        try {
+            nameString();
+            System.out.println("ProductBasket.searchProduct(\"Хлеб\") = " + searchProduct("Хлеб"));
+            System.out.println("ProductBasket.searchProduct(\"Бобиджон\") = " + searchProduct("Бобиджон"));
+        } catch (IllegalAccessException e) {
+            System.out.println("Невозможно вывести");
+        }
 
-        System.out.println("ProductBasket.searchProduct(\"Хлеб\") = " + searchProduct("Хлеб"));
-        System.out.println("ProductBasket.searchProduct(\"Бобиджон\") = " + searchProduct("Бобиджон"));
 
-        ProductBasket.cleanBascket();
+        cleanBascket();
 
-        ProductBasket.nameString();
+        nameString();
         System.out.println("ProductBasket.searchProduct(\"Хлеб\") = " + searchProduct("Хлеб"));
 
         System.out.println("SearchEngine");
@@ -57,7 +73,18 @@ public class App {
         searchEngine.add(article2);
         searchEngine.add(product5);
 
-        searchEngine.search("ARTICLE");
+        try {
+            searchEngine.search("PRODUCT");
+        } catch (IllegalAccessException e) {
+            System.out.println("Невозможно найти ошибка");
+        }
+
+
+        try {
+            System.out.println(searchEngine.saerchSuitable("гипс"));
+        } catch (BestResultNotFound e) {
+            System.out.println("Нет совпадений");
+        }
 
 
     }
