@@ -4,7 +4,11 @@ public class SimpleProduct extends Product {
     int priceProduct;
 
     public SimpleProduct(String nameProduct, int priceProduct) {
+
         super(nameProduct);
+        if (priceProduct < 0) {
+            throw new IllegalArgumentException();
+        }
         this.priceProduct = priceProduct;
     }
 
