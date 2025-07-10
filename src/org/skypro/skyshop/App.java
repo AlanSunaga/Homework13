@@ -1,6 +1,7 @@
 package org.skypro.skyshop;
 
 
+import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.bestResultNotFound.BestResultNotFound;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
@@ -8,27 +9,32 @@ import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.searchProduct.SearchEngine;
+import org.skypro.skyshop.searchProduct.Searchable;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 import static org.skypro.skyshop.basket.ProductBasket.*;
 
 
 public class App {
     public static void main(String[] args) throws IllegalAccessException {
-        Product product1 = null;
-        Product product2 = null;
-        Product product3 = null;
-        Product product4 = null;
-        Product product5 = null;
+        Product product1 = new SimpleProduct("Хлеб", 50);
+        Product product2 = new DiscountedProduct("Молоко", 80, 50);
+        Product product3 = new SimpleProduct("Сыр", 300);
+        Product product4 = new FixPriceProduct("Чипсы");
+        Product product5 = new DiscountedProduct("Пепси", 50, 20);
 
         try {
-            product1 = new SimpleProduct("Хлеб", 50);
-            product2 = new DiscountedProduct("Молоко", 80, 50);
-            product3 = new SimpleProduct("Сыр", -300);
-            product4 = new FixPriceProduct("Чипсы");
-            product5 = new DiscountedProduct("", 50, -20);
+            product1.getStringRepresentation();
+            product2.getStringRepresentation();
+            product3.getStringRepresentation();
+            product4.getStringRepresentation();
+            product5.getStringRepresentation();
         } catch (IllegalArgumentException e) {
             System.out.println("Заполните данные верно!");
         }
+
 
         addProductName(product1);
 
@@ -49,14 +55,16 @@ public class App {
         }
 
 
-        cleanBascket();
+//        cleanBascket();
 
-        nameString();
+        printBacket();
         System.out.println("ProductBasket.searchProduct(\"Хлеб\") = " + searchProduct("Хлеб"));
 
-        System.out.println("SearchEngine");
+        System.out.println('\n'
+                + "SearchEngine." + '\n'
+        );
 
-        SearchEngine searchEngine = new SearchEngine(10);
+        SearchEngine searchEngine = new SearchEngine();
 
         Article article1 = new Article("1", "1");
         Article article2 = new Article("2", "2");
@@ -85,6 +93,17 @@ public class App {
         } catch (BestResultNotFound e) {
             System.out.println("Нет совпадений");
         }
+
+        System.out.println('\n' + "Java Collections Framework: List" + '\n');
+
+        // В моем случае я все удаленные товары сохраняю в списке List
+
+        deletingAProductByName("Хлеб");
+        printDeletedBasket();
+        printBacket();
+        deletingAProductByName("Картошка");
+
+        printBacket();
 
 
     }
