@@ -10,7 +10,7 @@ public class DiscountedProduct extends Product {
             throw new IllegalArgumentException("Сумма базовой цены должна быть больше нуля");
         }
         this.basePrice = basePrice;
-        if (discount < 0 || discount > 100){
+        if (discount < 0 || discount > 100) {
             throw new IllegalArgumentException("Скидка должа быть в диапозоне от 0 до 100");
         }
         this.discount = discount;
