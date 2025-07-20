@@ -2,33 +2,32 @@ package org.skypro.skyshop.searchProduct;
 
 import org.skypro.skyshop.bestResultNotFound.BestResultNotFound;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchEngine {
-    public static Searchable[] searchables;
-    int index = 0;
-    int collSowSim;
+    private List<Searchable> searchables = new ArrayList<>();
+    private int index = 0;
+    private int collSowSim;
 
-    public SearchEngine(int size) {
-        searchables = new Searchable[size];
-    }
-
-    //Не понял как мне сделать растягивающийся размер массива при том
-    // что мы в конструкторе должны указать фиксированную величину
-    public String search(String s) throws IllegalAccessException {
+    public List<Searchable> search(String s) throws IllegalAccessException {
+        List<Searchable> list = new ArrayList<>();
         index = 0;
-        for (int i = 0; i < searchables.length; i++) {
-            if (searchables[i] == null) {
+        for (int i = 0; i < searchables.size(); i++) {
+            if (searchables.get(i) == null) {
                 throw new IllegalAccessException();
-            } else if (searchables[i].returnTypeContent().contains(s)) {
-                searchables[index] = searchables[i];
-                searchables[index].getStringRepresentation();
+            } else if (searchables.get(i).returnTypeContent().contains(s)) {
+                list.add(searchables.get(i));
+                list.get(index).getStringRepresentation();
                 index++;
-            } else searchables[i] = null;
+            }
         }
-        return null;
+        return list;
     }
+
 
     public void add(Searchable searchEngine) {
-        searchables[index] = searchEngine;
+        searchables.add(searchEngine);
         index++;
     }
 
