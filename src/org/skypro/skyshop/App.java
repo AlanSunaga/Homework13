@@ -69,7 +69,7 @@ public class App {
         searchEngine.add(product5);
 
         try {
-            searchEngine.search("ARTICLE");
+            searchEngine.search("PRODUCT");
         } catch (IllegalAccessException e) {
             System.out.println('\n' + "Невозможно найти ошибка");
         }
