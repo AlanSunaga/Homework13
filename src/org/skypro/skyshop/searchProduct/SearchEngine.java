@@ -1,30 +1,30 @@
 package org.skypro.skyshop.searchProduct;
 
 import org.skypro.skyshop.bestResultNotFound.BestResultNotFound;
+import org.skypro.skyshop.product.SearchableComparator;
 
 import java.util.*;
 
-public class SearchEngine {
-    private List<Searchable> searchables = new ArrayList<>();
+public class SearchEngine extends SearchableComparator {
+
+    private Set<Searchable> searchables = new HashSet<>();
     private int index = 0;
     private int collSowSim;
 
 
-    public Map<String, Searchable> search(String s) throws IllegalAccessException {
-        Map<String, Searchable> list = new TreeMap<>();
+    public Set<Searchable> search(String s) throws IllegalAccessException {
+        Set<Searchable> list = new TreeSet<>(new SearchableComparator());
         for (Searchable table : searchables) {
             if (table == null) {
                 throw new IllegalAccessException();
             } else if (table.returnTypeContent().contains(s)) {
-                list.put(table.getSearchTerm(), table);
+                list.add(table);
                 table.getStringRepresentation();
             }
 
         }
-        System.out.println('\n' +"По порядку" + '\n');
-        for (Searchable title : list.values()) {
-            title.getStringRepresentation();
-        }
+        System.out.println('\n' + "По порядку" + '\n');
+        System.out.println(list);
         return list;
     }
 
