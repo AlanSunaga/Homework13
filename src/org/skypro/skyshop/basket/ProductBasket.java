@@ -2,40 +2,50 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 public class ProductBasket {
-    private List<Product> products = new ArrayList<>();
+    private Map<String, Product> products = new HashMap<>();
 
     private int sum;
-    private int index = 1;
     private int scoreIsSpecial = 0;
+    private boolean w = true;
 
 
     public void addProductName(Product product) {
-        products.add(product);
-        index++;
+        products.put(product.getNameProduct(), product);
     }
 
     public int getTotalPrice() {
 
-        if (products.get(0) == null) {
-            return 0;
-        } else {
-            for (int i = 0; i < products.size(); i++) {
-                sum += products.get(i).getPriceProduct();
+        for (String name : products.keySet()) {
+            if (products.get(name) == null) {
+                return 0;
+            } else {
+                for (int i = 0; i < products.size(); i++) {
+                    sum += products.get(name).getPriceProduct();
+                }
             }
-            return sum;
         }
+
+        return sum;
+    }
+
+    public boolean searchNull() {
+        for (Product name : products.values()) {
+            if (name == null) {
+                w = false;
+            }
+        }
+        return w;
     }
 
     public void nameString() throws IllegalAccessException {
 
-        if (products.get(0) != null) {
-            for (Product product : products) {
+
+        if (searchNull()) {
+            for (Product product : products.values()) {
                 if (product == null) {
                     throw new IllegalAccessException();
                 } else {
@@ -54,8 +64,9 @@ public class ProductBasket {
     }
 
     public void printBacket() throws IllegalAccessException {
-        if (products.get(0) != null) {
-            for (Product product : products) {
+
+        if (w) {
+            for (Product product : products.values()) {
                 if (product == null) {
                     throw new IllegalAccessException();
                 } else {
@@ -70,14 +81,13 @@ public class ProductBasket {
 
     public Boolean searchProduct(String name) throws IllegalAccessException {
 
-        if (products.get(0) == null) {
+        if (!searchNull()) {
             return false;
         } else {
-
-            for (int i = 0; i < products.size(); i++) {
-                if (products.get(i) == null) {
+            for (Product product : products.values()) {
+                if (product == null) {
                     throw new IllegalAccessException();
-                } else if (products.get(i).getNameProduct() == name) {
+                } else if (product.getNameProduct() == name) {
                     return true;
                 }
             }
@@ -85,32 +95,33 @@ public class ProductBasket {
         }
     }
 
+
     public List<Product> deletingAProductByName(String name) {
-        Iterator<Product> iterator = products.iterator();
         List<Product> delete = new ArrayList<>();
-
-        while (iterator.hasNext()) {
-            Product element = iterator.next();
-            if (name == null) {
-                if (element.getNameProduct() == null) {
-                    iterator.remove();
+        for (Product product : products.values()) {
+            if (product == null) {
+                if (product.getNameProduct() == null) {
+                    for (String productKey : products.keySet()) {
+                        if (productKey.contains(product.getNameProduct())) {
+                            products.remove(name);
+                        }
+                    }
+                } else if (name.equals(product.getNameProduct())) {
+                    delete.add(product);
+                    System.out.println('\n' + "Список удаленных продуктов");
+                    return delete;
                 }
-            } else if (name.equals(element.getNameProduct())) {
-                delete.add(element);
-                iterator.remove();
-                System.out.println('\n' + "Список удаленных продуктов");
-                return delete;
             }
-
         }
         System.out.println('\n' + "Список удаленных продуктов пуст" + '\n');
         return delete;
     }
 
     public void cleanBascket() {
-        for (int i = 0; i < products.size(); i++) {
-            products.remove(i);
+        for (String productKey : products.keySet()) {
+            products.remove(productKey);
         }
+
     }
 
 }
