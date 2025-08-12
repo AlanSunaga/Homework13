@@ -36,7 +36,7 @@ public class App {
         productBasket.addProductName(product5);
 
         try {
-            productBasket.nameString();
+            productBasket.printBacket();
             System.out.println("ProductBasket.searchProduct(\"Хлеб\") = " + productBasket.searchProduct("Хлеб"));
             System.out.println("ProductBasket.searchProduct(\"Бобиджон\") = " + productBasket.searchProduct("Бобиджон"));
         } catch (IllegalAccessException e) {
@@ -69,7 +69,7 @@ public class App {
         searchEngine.add(product5);
 
         try {
-            searchEngine.search("PRODUCT");
+            System.out.println(searchEngine.search("PRODUCT"));
         } catch (IllegalAccessException e) {
             System.out.println('\n' + "Невозможно найти ошибка");
         }
